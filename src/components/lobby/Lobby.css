@@ -1,0 +1,74 @@
+.lobby {
+    background-color: #1e1e1e;
+    /* Light gray background */
+    color: #f2f2f7;
+    /* Black text color */
+    padding: 20px;
+    text-align: center;
+    /* Center align content */
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lobby header {
+    width: 100%;
+    background-color: rgb(255, 217, 0);
+    /* text-shadow: 2px 2px 4px rgb(255, 0, 0); */
+}
+.lobby header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #f2f2f7;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.lobby main {
+    flex-grow: 1;
+    /* Expand main content to fill remaining space */
+}
+
+.problems {
+    list-style: none;
+    /* Remove default list styles */
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.problems li {
+    background-color: #333333;
+    ;
+    ;
+    /* White background */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    overflow: hidden;
+    /* Hide overflowing content */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transitions */
+}
+
+.problems li:hover {
+    transform: translateY(-5px);
+    /* Move up on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    /* Increase shadow on hover */
+}
+
+.problems li p {
+    margin: 0;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #f2f2f7;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.problems a {
+    text-decoration: none;
+}

@@ -1,0 +1,50 @@
+.codeBlock {
+    height: 50%;
+    /* display: flex; */
+}
+.codeBlock .description {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff; /* White text color */
+    border-bottom:solid 1px rgb(168, 168, 168);
+    white-space: pre-line; /* Preserve line breaks */
+    padding: 30px;
+}
+
+.codeBlock .description h2 {
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.codeBlock .description h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.codeBlock .description p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.codeBlock .editor {
+    /* width: 50%; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(23, 23, 23); */
+    border-bottom:solid 1px rgb(168, 168, 168);
+}
+
+.codeBlock .editor .runBtn{
+    padding: 5px 10px;
+    border-radius: 5px;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 5px 0;
+}
+/* .codeBlock .editor .monaco-editor {
+    min-height: 100vh;
+    min-width: 100%;
+} */
