@@ -10,10 +10,22 @@
     white-space: pre-line; /* Preserve line breaks */
     padding: 30px;
 }
+.codeBlock .description button{
+    padding: 10px 20px; /* Adjust padding for better button size */
+    border-radius: 8px; /* Add border radius for smoother edges */
+    background-color: #6e6e70; /* Use a dark background color */
+    color: #ffffff; /* Text color */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    border: none; /* Remove border */
+    cursor: pointer; /* Show pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
 
 .codeBlock .description h2 {
     margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
 }
 
 .codeBlock .description h3 {
@@ -38,11 +50,19 @@
 }
 
 .codeBlock .editor .runBtn{
-    padding: 5px 10px;
-    border-radius: 5px;
-    flex-direction: column;
-    background-color: #ffffff;
-    margin: 5px 0;
+    padding: 5px 20px; /* Increase padding for better touch accessibility */
+    
+    background-color: #e2e2e2; /* Use Apple's primary blue color */
+    color: #2a2a2a; /* Text color for better contrast */
+    font-size: 14px; /* Adjust font size for better readability */
+    font-weight: bold; /* Emphasize button text */
+    text-align: center; /* Center-align button text */
+    cursor: pointer; /* Show pointer cursor to indicate interactivity */
+    border: none; /* Remove border for cleaner look */
+    transition: background-color 0.3s ease; /* Add transition for smoother hover effect */
+
+    /* Optional: Add box shadow for depth effect */
+    box-shadow: 0px 2px 4px rgba(0, 122, 255, 0.2);
 }
 /* .codeBlock .editor .monaco-editor {
     min-height: 100vh;

@@ -24,7 +24,6 @@ function CodeBlock() {
     useEffect(() => {
         setLoading(true);
 
-        console.log("api base url = " + API_BASE_URL)
         // Fetch specific code block data based on the id
         axios.get(`${API_BASE_URL}/getCodeBlock/${id}`)
             .then(response => {
@@ -40,15 +39,19 @@ function CodeBlock() {
         const storedRole = sessionStorage.getItem(`role-${id}`);
         socket.emit('accessCodeBlockPage', { codeBlockId: id });
         if (storedRole) {
-            setUserRole(storedRole); // Use the stored role if available
+            setUserRole(storedRole.toString()); // Use the stored role if available
+            console.log("userRole stored: " + storedRole.toString())
+
         } else {
             socket.emit('requestIsFirstUser', { codeBlockId: id });
             socket.on('recievedIsFirstUser', isFirstUser => {
                 const userType = isFirstUser ? "mentor" : "student";
                 setUserRole(userType);
-                sessionStorage.setItem(`role-${id}`, userType);
+                sessionStorage.setItem(`role-${id}`, userType.toString());
+                console.log("userRole first user: " + userType.toString())
             });
         }
+        
 
         // Emit an event when leaving the page
         const handleBeforeUnload = () => {
@@ -111,7 +114,7 @@ function CodeBlock() {
         <div className="codeBlock">
             <div className="description">
                 <Link to="/">
-                    <button>Back</button>
+                    <button>Go Back</button>
                 </Link>
                 <h2>{file.title}</h2>
                 <p>{file.explanation}</p>
@@ -134,9 +137,12 @@ function CodeBlock() {
                         contextmenu: false
                     }}
                 />
-                <button onClick={handleOnClick}>
-                    Run
-                </button>
+
+                {userRole != 'mentor' && (
+                    <button className="runBtn" onClick={handleOnClick}>
+                        Run Code
+                    </button>
+                )}
             </div>
             {isAnswerCorrect && (
                 <div className="answerCorrect">
