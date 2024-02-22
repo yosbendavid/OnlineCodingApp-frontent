@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Lobby.css'
 
-const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
+// const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const CodeBlocks = () => {
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://onlinecodingapp-backend-production.up.railway.app/getAllCodeBlocks`)
+    console.log("api base url = " + API_BASE_URL)
+
+    axios.get(`${API_BASE_URL}/getAllCodeBlocks`)
       .then(response => {
         setCodeBlocks(response.data);
       })

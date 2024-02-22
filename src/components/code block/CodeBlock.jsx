@@ -7,7 +7,8 @@ import './CodeBlock.css';
 import imgSmile from '../../images/smiley.svg';
 
 // Dynamically determine the base URL
-const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
+// const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Connect to the backend dynamically based on the environment
 const socket = io(API_BASE_URL);
@@ -23,8 +24,9 @@ function CodeBlock() {
     useEffect(() => {
         setLoading(true);
 
+        console.log("api base url = " + API_BASE_URL)
         // Fetch specific code block data based on the id
-        axios.get(`${API_BASE_URL}getCodeBlock/${id}`)
+        axios.get(`${API_BASE_URL}/getCodeBlock/${id}`)
             .then(response => {
                 setFile(response.data);
                 setText(response.data.code);
