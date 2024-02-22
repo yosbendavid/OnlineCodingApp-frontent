@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import './CodeBlock.css';
-import imgSmile from '../images/smiley.svg';
+import imgSmile from '../../images/smiley.svg';
 
 // Dynamically determine the base URL
 const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
