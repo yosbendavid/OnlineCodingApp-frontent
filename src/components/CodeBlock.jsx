@@ -11,7 +11,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
     ? 'https://onlinecodingapp-backend-production.up.railway.app/' // Production API URL
     : 'http://localhost:3001'; // Development API URL
 
-const socket = io(API_BASE_URL); // Connect to your backend dynamically based on environment
+const socket = io(`https://onlinecodingapp-backend-production.up.railway.app/`); // Connect to your backend dynamically based on environment
 
 function CodeBlock() {
     const [file, setFile] = useState({});
@@ -26,7 +26,7 @@ function CodeBlock() {
         setLoading(true);
 
         // Fetch the specific code block data based on the id
-        axios.get(`${ API_BASE_URL }/getCodeBlock/${ id }`)
+        axios.get(`https://onlinecodingapp-backend-production.up.railway.app/getCodeBlock/${ id }`)
             .then(response => {
                 setFile(response.data);
                 setText(response.data.code);

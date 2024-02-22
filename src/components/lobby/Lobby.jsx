@@ -11,7 +11,7 @@ const CodeBlocks = () => {
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   useEffect(() => {
-    axios.get(`${ API_BASE_URL }/getAllCodeBlocks`)
+    axios.get(`https://onlinecodingapp-backend-production.up.railway.app/getAllCodeBlocks`)
       .then(response => {
         setCodeBlocks(response.data);
       })
