@@ -7,9 +7,7 @@ import './CodeBlock.css';
 import imgSmile from '../images/smiley.svg';
 
 // Determine the base URL dynamically
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? 'https://onlinecodingapp-backend-production.up.railway.app/' // Production API URL
-    : 'http://localhost:3001'; // Development API URL
+const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
 
 const socket = io(`https://onlinecodingapp-backend-production.up.railway.app/`); // Connect to your backend dynamically based on environment
 

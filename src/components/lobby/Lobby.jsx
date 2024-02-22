@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Lobby.css'
 
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? 'https://onlinecodingapp-backend-production.up.railway.app/' // Production API URL
-    : 'http://localhost:3001'; // Development API URL
+const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
 
 const CodeBlocks = () => {
   const [codeBlocks, setCodeBlocks] = useState([]);
