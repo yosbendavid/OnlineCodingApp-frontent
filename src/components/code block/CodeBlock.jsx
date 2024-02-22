@@ -6,16 +6,16 @@ import io from 'socket.io-client';
 import './CodeBlock.css';
 import imgSmile from '../images/smiley.svg';
 
-// Determine the base URL dynamically
+// Dynamically determine the base URL
 const API_BASE_URL = 'https://onlinecodingapp-backend-production.up.railway.app/';
 
-const socket = io(`https://onlinecodingapp-backend-production.up.railway.app/`); // Connect to your backend dynamically based on environment
+// Connect to the backend dynamically based on the environment
+const socket = io(API_BASE_URL);
 
 function CodeBlock() {
     const [file, setFile] = useState({});
-    const editorRef = useRef(null);
-    const [userRole, setUserRole] = useState(''); // Initialize your role state here
-    const { id } = useParams(); // Extract the id parameter from the URL,,,
+    const [userRole, setUserRole] = useState(''); // Initialize the role state
+    const { id } = useParams(); // Extract the id parameter from the URL
     const [text, setText] = useState();
     const [loading, setLoading] = useState();
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
@@ -23,8 +23,8 @@ function CodeBlock() {
     useEffect(() => {
         setLoading(true);
 
-        // Fetch the specific code block data based on the id
-        axios.get(`https://onlinecodingapp-backend-production.up.railway.app/getCodeBlock/${ id }`)
+        // Fetch specific code block data based on the id
+        axios.get(`${API_BASE_URL}getCodeBlock/${id}`)
             .then(response => {
                 setFile(response.data);
                 setText(response.data.code);
@@ -35,30 +35,20 @@ function CodeBlock() {
                 setLoading(false);
             });
 
-
         const storedRole = sessionStorage.getItem(`role-${id}`);
         socket.emit('accessCodeBlockPage', { codeBlockId: id });
         if (storedRole) {
-            console.log("Your Role is: " + storedRole.toString())
-            setUserRole(storedRole); // Use the stored role
+            setUserRole(storedRole); // Use the stored role if available
         } else {
-            socket.emit('requestIsFirstUser', { codeBlockId: id })
+            socket.emit('requestIsFirstUser', { codeBlockId: id });
             socket.on('recievedIsFirstUser', isFirstUser => {
-                let userType;
-                console.log("recieved is first user")
-                if (isFirstUser) {
-                    userType = "mentor"
-                }
-                else {
-                    userType = "student"
-                }
-                console.log("setting user to= " + userType)
+                const userType = isFirstUser ? "mentor" : "student";
                 setUserRole(userType);
-                sessionStorage.setItem(`role-${id}`, userType.toString());
-            })
+                sessionStorage.setItem(`role-${id}`, userType);
+            });
         }
 
-        // Function to emit an event when leaving the page
+        // Emit an event when leaving the page
         const handleBeforeUnload = () => {
             socket.emit('leaveCodeBlockPage', { codeBlockId: id });
         };
@@ -71,7 +61,7 @@ function CodeBlock() {
             socket.emit('leaveCodeBlockPage', { codeBlockId: id });
             socket.off('recievedIsFirstUser');
         };
-    }, [id])
+    }, [id]);
 
     useEffect(() => {
         const handleTextUpdated = newText => {
@@ -85,7 +75,7 @@ function CodeBlock() {
         };
     }, []);
 
-    const debouncedEmitUpdateText = useCallback((newText) => {
+    const debouncedEmitUpdateText = useCallback(newText => {
         socket.emit('updateText', newText);
     }, []);
 
@@ -98,7 +88,7 @@ function CodeBlock() {
     };
 
     const handleOnChange = useCallback(
-        debounce((value) => {
+        debounce(value => {
             const newText = value.toString();
             setText(newText); // Update text locally immediately
             debouncedEmitUpdateText(newText); // Debounced emit to avoid too many socket events
@@ -107,20 +97,13 @@ function CodeBlock() {
     );
 
     const handleOnClick = () => {
-        function compareStrings(str1, str2) {
-            // Remove whitespace and convert strings to lowercase
+        const compareStrings = (str1, str2) => {
             const formattedStr1 = str1.replace(/\s/g, '').toLowerCase();
             const formattedStr2 = str2.replace(/\s/g, '').toLowerCase();
-
-            // Compare the formatted strings
-            if (formattedStr1 === formattedStr2) {
-                return true; // Strings are the same after removing spaces and case sensitivity
-            } else {
-                return false; // Strings are different
-            }
-        }
-        compareStrings(text, file.solution) ? setIsAnswerCorrect(true) : setIsAnswerCorrect(true);
-    }
+            return formattedStr1 === formattedStr2;
+        };
+        setIsAnswerCorrect(compareStrings(text, file.solution));
+    };
 
     return (
         <div className="codeBlock">
@@ -153,12 +136,11 @@ function CodeBlock() {
                     Run
                 </button>
             </div>
-            {isAnswerCorrect ?
+            {isAnswerCorrect && (
                 <div className="answerCorrect">
-                    <img src={imgSmile} alt='smile' />
+                    <img src={imgSmile} alt="smile" />
                 </div>
-                : null
-            }
+            )}
         </div>
     );
 }

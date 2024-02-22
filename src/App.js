@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Lobby from './components/lobby/Lobby.jsx';
-import CodeBlock from './components/CodeBlock.jsx';
+import CodeBlock from './components/code block/CodeBlock.jsx';
 
 function App() {
   return (
