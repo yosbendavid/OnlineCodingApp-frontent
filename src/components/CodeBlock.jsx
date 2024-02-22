@@ -8,7 +8,7 @@ import imgSmile from '../images/smiley.svg';
 
 // Determine the base URL dynamically
 const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? 'https://onlinecodingapp.up.railway.app' // Production API URL
+    ? 'https://onlinecodingapp-backend-production.up.railway.app/' // Production API URL
     : 'http://localhost:3001'; // Development API URL
 
 const socket = io(API_BASE_URL); // Connect to your backend dynamically based on environment

@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Lobby.css'
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
-    ? 'https://onlinecodingapp.up.railway.app' // Production API URL
+    ? 'https://onlinecodingapp-backend-production.up.railway.app/' // Production API URL
     : 'http://localhost:3001'; // Development API URL
 
 const CodeBlocks = () => {
