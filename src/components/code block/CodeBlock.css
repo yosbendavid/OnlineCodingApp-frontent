@@ -49,6 +49,10 @@
     border-bottom:solid 1px rgb(168, 168, 168);
 }
 
+.codeBlock .editor  .funcHead {
+ color: white;
+}
+
 .codeBlock .editor .runBtn{
     padding: 5px 20px; /* Increase padding for better touch accessibility */
     
