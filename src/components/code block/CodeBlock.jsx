@@ -99,7 +99,7 @@ function CodeBlock() {
             const newText = value.toString();
             setText(newText); // Update text locally immediately
             debouncedEmitUpdateText(newText); // Debounced emit to avoid too many socket events
-        }, 100), // Adjust the delay time (in milliseconds) according to your preference
+        }, 500), // Adjust the delay time (in milliseconds) according to your preference
         [debouncedEmitUpdateText]
     );
 
