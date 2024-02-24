@@ -38,11 +38,13 @@ function CodeBlock() {
         const storedRole = sessionStorage.getItem(`role-${id}`);
         socket.emit('accessCodeBlockPage', { codeBlockId: id });
         if (storedRole) {
+            console.log("storedRole: "+ storedRole)
             setUserRole(storedRole.toString()); // Use the stored role if available
         } else {
             socket.emit('requestIsFirstUser', { codeBlockId: id });
             socket.on('recievedIsFirstUser', isFirstUser => {
                 const userType = isFirstUser ? "mentor" : "student";
+                console.log("FirstUserRole : "+ userType)
                 setUserRole(userType);
                 sessionStorage.setItem(`role-${id}`, userType.toString());
             });
@@ -106,6 +108,7 @@ function CodeBlock() {
     const handleOnClick = useCallback(() => {
         const parameterNames = file.functionParams? file.functionParams : '';
         const args = file.solutionArg? file.solutionArg: '';
+
         try {
             const dynamicFunction = new Function(...parameterNames, text);
     
